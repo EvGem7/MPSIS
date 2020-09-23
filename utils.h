@@ -3,7 +3,7 @@
 
 #include <msp430.h>
 
-#define TRANSITION_DELAY 400
+#define TRANSITION_DELAY 2000
 
 #define int16 int
 #define u_int16 unsigned int
@@ -32,8 +32,10 @@
       break;                        \
   }
 
+#define read(port, bit) (port & bit) ? 1 : 0
+
 void delay(u_int16 cycles) {
-  u_int16 i;
+  volatile u_int16 i;
   for (i = 0; i < cycles; ++i);
 }
 
@@ -46,19 +48,11 @@ bool getD1(void) {
 }
 
 bool s1(void) {
-	if (P1IN & BIT7) {
-		return 0;
-	} else {
-		return 1;
-	}
+	return !read(P1IN, BIT7);
 }
 
 bool s2(void) {
-  if (P2IN & BIT2) {
-  		return 0;
-  	} else {
-  		return 1;
-  	}
+	return !read(P2IN, BIT2);
 }
 
 #endif
