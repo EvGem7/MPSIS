@@ -33,7 +33,8 @@
   }
 
 void delay(u_int16 cycles) {
-  for (u_int16 i = 0; i < cycles; ++i);
+  u_int16 i;
+  for (i = 0; i < cycles; ++i);
 }
 
 void setD1(bool enabled) {
@@ -45,11 +46,19 @@ bool getD1(void) {
 }
 
 bool s1(void) {
-  return P1IN & BIT7;
+	if (P1IN & BIT7) {
+		return 0;
+	} else {
+		return 1;
+	}
 }
 
 bool s2(void) {
-  return P2IN & BIT2;
+  if (P2IN & BIT2) {
+  		return 0;
+  	} else {
+  		return 1;
+  	}
 }
 
 #endif
