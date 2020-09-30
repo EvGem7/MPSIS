@@ -33,21 +33,23 @@ int main(void) {
 }
 
 /////////////////////////////////////////////
-
 #include "utils.h"
 #include <msp430.h>
 
 #pragma vector = PORT2_VECTOR
 __interrupt void isr(void) {
+	bool s1State, s2State;
 	if (!read(P2IFG, BIT2)) {
 		return;
 	}
-
-	delay(TRANSITION_DELAY);
-	if (!s2() && !s1()) {
-		setD1(!getD1());
+	if ((s1State = s1()) || (s2State = s2())) {
+		turn(P2IFG, BIT2, 0);
+		return;
 	}
-
+	delay(TRANSITION_DELAY);
+	if (s1State == s1() && s2State == s2()) {
+		P1OUT ^= BIT0;
+	}
 	turn(P2IFG, BIT2, 0);
 }
 
