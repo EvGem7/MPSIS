@@ -3,10 +3,10 @@
 
 #include <msp430.h>
 
-#define TRANSITION_DELAY 2000
+#define TRANSITION_DELAY 1000
 
-#define int16 int
-#define u_int16 unsigned int
+#define int16 short int
+#define u_int16 unsigned short int
 
 #define bool char
 
