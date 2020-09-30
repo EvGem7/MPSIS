@@ -12,9 +12,9 @@ int main(void) {
 
   while (1) {
     bool s1Val, s2Val;
-    do {
-      s2Val = s2();
-    } while(s1Val = s1());
+
+    s1Val = s1();
+    s2Val = s2();
 
     delay(TRANSITION_DELAY);
 
@@ -22,15 +22,14 @@ int main(void) {
       continue;
     }
 
-    if (s2Prev == 1 && s2Val == 0) {
-    	if (!s1()) {
-    		setD1(!getD1());
-    	}
+    if (s2Prev == 1 && s2Val == 0 && s1Val == 0) {
+    	setD1(!getD1());
     }
 
     s2Prev = s2Val;
   }
 }
+
 
 /////////////////////////////////////////////
 #include "utils.h"
