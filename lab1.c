@@ -31,7 +31,7 @@ int main(void) {
 }
 
 
-/////////////////////////////////////////////
+/////////////////////////////////////////
 #include "utils.h"
 #include <msp430.h>
 
@@ -64,6 +64,8 @@ int main(void) {
   turn(P2IE, BIT2, 1); 	// enable interrupt s2
   turn(P2IES, BIT2, 0); // back front
   P1IFG = 0x00;			// Clear all interrupt flags
+
+  setD1(0);
 
   __no_operation();
 }
